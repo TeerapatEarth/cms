@@ -1,4 +1,4 @@
-import type { NextPage, NextPageContext } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import { Post } from "../../model/Post";
 import Detail from "../../components/Detail";

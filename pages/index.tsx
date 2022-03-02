@@ -3,11 +3,21 @@ import type { NextPage } from "next";
 import Card from "../components/Card";
 import { Post } from "../model/Post";
 import Head from "next/head";
+import useFetchAllPost from "../hook/useFetchAllPost";
 
-interface Props {
-  posts: Post[];
-}
-const Home: NextPage<Props> = ({ posts }) => {
+const Home: NextPage = () => {
+  const { posts, loading, error } = useFetchAllPost();
+
+  if(loading){
+    return (
+      <div>loading</div>
+    )
+  }
+  if(error){
+    return (
+      <div>error</div>
+    )
+  }
   return (
     <Box pl={10} pb={10} pr={10} pt={5}>
       <Head>
@@ -30,15 +40,6 @@ const Home: NextPage<Props> = ({ posts }) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const res = await fetch("https://fswd-wp.devnss.com/wp-json/wp/v2/posts/");
-  const posts = await res.json();
-  return {
-    props: {
-      posts,
-    },
-  };
-};
 export default Home;
 
 //https://fswd-wp.devnss.com/wp-json/wp/v2/posts
