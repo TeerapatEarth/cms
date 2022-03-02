@@ -114,7 +114,7 @@ const Detail = ({ post }: Props) => {
             <GridItem colSpan={10}>
               <Box
                 mt={5}
-                dangerouslySetInnerHTML={{ __html: post?.content.rendered }}
+                dangerouslySetInnerHTML={{ __html: String(post?.content.rendered) }}
               ></Box>
             </GridItem>
             <GridItem colSpan={1}></GridItem>
