@@ -19,7 +19,7 @@ import useFetchAuthor from "../hook/useFetchAuthor";
 import { useCallback, useState } from "react";
 import useFetchTag from "../hook/useFetchTag";
 import { Tags } from "../model/Tags";
-import { Comment } from "../model/Comment"
+import { Comment } from "../model/Comment";
 
 type Props = {
   post: Post | undefined;
@@ -38,11 +38,12 @@ const Detail = ({ post }: Props) => {
 
   const addComment = useCallback(() => {
     const newArr = comments;
-    const newCom = { id: "1", user: "Teerapat", comment: commentInput}
+    const newCom = { id: "1", user: "Teerapat", comment: commentInput };
     newArr.push(newCom);
     setComments(newArr);
     setCommentInput("");
   }, [commentInput, comments]);
+
   return (
     <Box p={10}>
       <Center>
@@ -108,13 +109,22 @@ const Detail = ({ post }: Props) => {
                 {post?.date.substring(0, 10)} {post?.date.substring(11)}
               </Text>
             </GridItem>
+
+            <GridItem colSpan={1}></GridItem>
+            <GridItem colSpan={10}>
+              <Box
+                mt={5}
+                dangerouslySetInnerHTML={{ __html: post?.content.rendered }}
+              ></Box>
+            </GridItem>
+            <GridItem colSpan={1}></GridItem>
             <GridItem colSpan={2}>
               <Center mt={5}>
                 <Text fontSize={30}>Comment</Text>
               </Center>
             </GridItem>
             <GridItem colSpan={10}></GridItem>
-            <GridItem colSpan={11} mt={5}>
+            <GridItem colSpan={12} mt={5}>
               {comments.map((item, index) => (
                 <Grid templateColumns="repeat(12, 1fr)" mb={5} key={index}>
                   <GridItem colSpan={2}>
@@ -133,8 +143,9 @@ const Detail = ({ post }: Props) => {
                 </Grid>
               ))}
             </GridItem>
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={8}>
+
+            <GridItem colSpan={1}></GridItem>
+            <GridItem colSpan={9}>
               <Input
                 w={"100%"}
                 onChange={(e) => setCommentInput(e.target.value)}
