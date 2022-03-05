@@ -74,7 +74,7 @@ const Card = ({ post }: Props) => {
                 }}
               >
                 <Menu>
-                  <Link href={"/tag/" + tag.name} passHref>
+                  <Link href={"/tag/" + tag.id} passHref>
                     <MenuButton isTruncated>
                       <Text isTruncated>{tag.name}</Text>
                     </MenuButton>

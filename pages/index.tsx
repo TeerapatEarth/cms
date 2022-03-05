@@ -3,10 +3,10 @@ import type { NextPage } from "next";
 import Card from "../components/Card";
 import { Post } from "../model/Post";
 import Head from "next/head";
-import useFetchAllPost from "../hook/useFetchAllPost";
+import useFetchPost from "../hook/useFetchPost";
 
 const Home: NextPage = () => {
-  const { posts, loading, error } = useFetchAllPost();
+  const { posts, loading, error } = useFetchPost("https://fswd-wp.devnss.com/wp-json/wp/v2/posts");
 
   if(loading){
     return (

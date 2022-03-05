@@ -1,17 +1,13 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { Post } from "../../model/Post";
 import Detail from "../../components/Detail";
 import useFetchOnePost from "../../hook/useFetchOnePost";
-import { useRouter } from "next/router";
 
 interface Props {
-  postDetail: Post;
+  id: string
 }
 
-const PostDetail: NextPage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+const PostDetail: NextPage<Props> = ({id}) => {
   const { postDetail, loading, error, renderPost } = useFetchOnePost(id);
   if (loading) {
     return <div>loading</div>;
@@ -31,17 +27,14 @@ const PostDetail: NextPage = () => {
   );
 };
 
-PostDetail.getInitialProps = async (context: any) => {
-  const { id } = context.query;
-  const res = await fetch(
-    "https://fswd-wp.devnss.com/wp-json/wp/v2/posts/" + id
-  );
-  const postDetail = await res.json();
+
+export const getServerSideProps = (context: any) => {
+  const { id } = context.query
   return {
     props: {
-      postDetail,
-    },
-  };
-};
+      id,
+    }
+  }
+}
 
 export default PostDetail;
