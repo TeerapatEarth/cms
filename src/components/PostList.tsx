@@ -13,7 +13,7 @@ const PostList = ({ id }: Props) => {
   );
 
   return (
-    <Box bg={"blackAlpha.300"} borderRadius={10} p={5}>
+    <Box bg={"blackAlpha.300"} borderRadius={10} p={5} overflowX="auto">
       <Table variant="simple">
         <Thead>
           <Tr>
