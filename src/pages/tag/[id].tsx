@@ -15,7 +15,15 @@ const TagPost: NextPage<Props> = ({id}) => {
   const { tag } = useFetchOneTag(id)
   if(loading){
     return (
-      <div>loading</div>
+      <Center mt={10}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Center>
     )
   }
   if(error){

@@ -2,15 +2,26 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Detail from "../../components/Detail";
 import useFetchOnePost from "../../hook/useFetchOnePost";
+import { Center, Spinner } from "@chakra-ui/react";
 
 interface Props {
-  id: string
+  id: string;
 }
 
-const PostDetail: NextPage<Props> = ({id}) => {
+const PostDetail: NextPage<Props> = ({ id }) => {
   const { postDetail, loading, error, renderPost } = useFetchOnePost(id);
   if (loading) {
-    return <div>loading</div>;
+    return (
+      <Center mt={10}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Center>
+    );
   }
   if (error) {
     return <div>error</div>;
@@ -27,14 +38,13 @@ const PostDetail: NextPage<Props> = ({id}) => {
   );
 };
 
-
 export const getServerSideProps = (context: any) => {
-  const { id } = context.query
+  const { id } = context.query;
   return {
     props: {
       id,
-    }
-  }
-}
+    },
+  };
+};
 
 export default PostDetail;

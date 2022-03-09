@@ -6,17 +6,25 @@ import Head from "next/head";
 import useFetchPost from "../hook/useFetchPost";
 
 const Home: NextPage = () => {
-  const { posts, loading, error } = useFetchPost("https://fswd-wp.devnss.com/wp-json/wp/v2/posts");
+  const { posts, loading, error } = useFetchPost(
+    "https://fswd-wp.devnss.com/wp-json/wp/v2/posts"
+  );
 
-  if(loading){
+  if (loading) {
     return (
-      <div>loading</div>
-    )
+      <Center mt={10}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Center>
+    );
   }
-  if(error){
-    return (
-      <div>error</div>
-    )
+  if (error) {
+    return <div>error</div>;
   }
   return (
     <Box pl={10} pb={10} pr={10} pt={5}>
@@ -41,5 +49,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-//https://fswd-wp.devnss.com/wp-json/wp/v2/posts
